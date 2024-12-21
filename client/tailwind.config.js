@@ -14,9 +14,13 @@ export default {
         landingPageThirdScreenBreakPoint: "429px",
         landingPageScreenFourthBreakPoint: "403px",
         validationBreakPoint: "785px",
+        loggedInScreen: "833px",
       },
       fontFamily: {
         inika: "inika",
+      },
+      colors: {
+        mainTheme: "#FF6132",
       },
     },
   },

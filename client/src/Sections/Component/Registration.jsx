@@ -134,7 +134,7 @@ function Registration({ text }) {
             Already have an account?{" "}
             <a
               onClick={() => navigate("/Login")}
-              className="text-[#FF6132] cursor-pointer"
+              className="text-black cursor-pointer max-planSmallScreen:text-[#ff6132]"
             >
               Sign In
             </a>
