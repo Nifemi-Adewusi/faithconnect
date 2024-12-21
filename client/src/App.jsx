@@ -16,6 +16,7 @@ import "./App.css";
 import Search from "./Sections/Component/Search";
 import Devotional from "./Sections/Component/Devotional";
 import LandingPage1 from "./Sections/LandingPage1";
+import Reels from "./Sections/Component/Reels";
 // import Plans from "../../Sections/Plans.jsx";
 // import Plans from "./Sections/Plans";
 // import './App.css'
@@ -59,6 +60,7 @@ function App() {
           <Route path="/user-profile" element={<UserProfile></UserProfile>} />
           <Route path="/search" element={<Search></Search>} />
           <Route path="/devotional" element={<Devotional></Devotional>} />
+          <Route path="/reels" element={<Reels></Reels>} />
         </Routes>
       </Router>
     </>

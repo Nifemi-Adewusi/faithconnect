@@ -32,6 +32,7 @@ const LoggedInSideBar = () => {
       <img
         className="w-[46.95px] max-[833px]:mx-0 h-[45px] mx-auto cursor-pointer"
         src={Reels}
+        onClick={() => navigate("/reels")}
         alt=""
       />
       <img
@@ -52,6 +53,7 @@ const LoggedInSideBar = () => {
       <img
         className="w-[46.95px] max-[833px]:mx-0 h-[45px] mx-auto cursor-pointer"
         src={Account}
+        onClick={() => navigate("/user-profile")}
         alt=""
       />
       <img

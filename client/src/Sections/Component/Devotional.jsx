@@ -20,7 +20,9 @@ const Devotional = () => {
     <div className="flex gap-60 max-loggedInScreen:flex-col-reverse max-loggedInScreen:px-4">
       <LoggedInSideBar />
       <div className="mt-4">
-        <h1 className="text-center font-bold text-2xl mb-4">Devotional</h1>
+        <h1 className="text-center font-bold text-2xl mb-4 max-loggedInScreen:text-left max-loggedInScreen:flex max-loggedInScreen:justify-center">
+          Devotional
+        </h1>
         <img src={devotionalImage} alt="" />
         <p className="font-[600] text-3xl mb-4">
           Transformation by the Holy Spirit
