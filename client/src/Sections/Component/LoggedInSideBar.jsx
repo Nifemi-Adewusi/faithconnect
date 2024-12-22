@@ -48,6 +48,7 @@ const LoggedInSideBar = () => {
       <img
         className="w-[41px] max-[833px]:mx-0 h-[28.38px] mx-auto cursor-pointer"
         src={VideoImg}
+        onClick={() => navigate("/post")}
         alt=""
       />
       <img
