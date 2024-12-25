@@ -3,7 +3,9 @@ import arrow from "./Posts-images/Arrow.png";
 // import gallery from "./Posts-images/Gallery.png";
 // import play from "./Posts-images/Play-icon.png";
 import gallery from "./Posts-images/galle.png";
+import { useNavigate } from "react-router-dom";
 function Posts() {
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState([]);
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
@@ -15,7 +17,12 @@ function Posts() {
   return (
     <div>
       <div className="flex justify-center gap-16 mt-5 items-center">
-        <img src={arrow} alt="" />
+        <img
+          className="cursor-pointer"
+          onClick={() => navigate("/user-profile")}
+          src={arrow}
+          alt=""
+        />
         <h1 className="font-bold text-2xl">Create new post</h1>
       </div>
       <hr className="bg-mainTheme h-1 w-full mt-3" />

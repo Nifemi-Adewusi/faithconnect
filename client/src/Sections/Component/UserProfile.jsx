@@ -15,7 +15,12 @@ import reels from "./Profile-Images/reels.png";
 import profileMenu from "./Profile-Images/menu.png";
 import tag from "./Profile-Images/tags.png";
 import LoggedInSideBar from "./LoggedInSideBar";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../../GlobalVariables";
 const UserProfile = () => {
+  const navigate = useNavigate();
+  const { userHandle, userName, bio } = useContext(MyContext);
   return (
     <div className="flex gap-24 lg:gap-48 xl:gap-72 max-[833px]:flex-col-reverse max-[833px]:px-8">
       {/* <div className=" h-[823px] bg-[#FF6132] flex flex-col  justify-between max-[833px]:flex-row max-[833px]:h-[45px] max-[833px]:items-center max-[833px]:w-390px relative max-[833px]:bottom-0 max-[833px]:px-3 max-[833px]:py-2">
@@ -68,8 +73,12 @@ const UserProfile = () => {
       <LoggedInSideBar />
       <div className="mt-10">
         <div className="flex gap-6">
-          <p>jane_cooper_123</p>
-          <button className="w-[170px] rounded-[6px] h-[30px] bg-[#EFEFEF]">
+          {/* <p>jane_cooper_123</p> */}
+          <p>{userHandle}</p>
+          <button
+            className="w-[170px] rounded-[6px] h-[30px] bg-[#EFEFEF]"
+            onClick={() => navigate("/edit-profile")}
+          >
             Edit Profile
           </button>
           <button className="w-[170px] rounded-[6px] h-[30px] bg-[#EFEFEF]">
@@ -79,7 +88,7 @@ const UserProfile = () => {
         <div className="flex items-center gap-10 mt-5">
           <div>
             <img src={userImg} alt="" />
-            <p className="text-[10px]">Jane Cooper</p>
+            <p className="text-[10px]">{userName}</p>
           </div>
           <div>
             <p className="text-[16px]">65</p>
@@ -97,7 +106,7 @@ const UserProfile = () => {
         <div className="mt-5">
           <p className="text-[11px] text-[#ADADAD]">Artist</p>
           <p className="text-[11px]">Believe in Christ</p>
-          <p className="text-[11px]">All will be well in His Name</p>
+          <p className="text-[11px]">{bio}</p>
         </div>
         <div className="flex gap-28 items-center mt-8">
           <img className="cursor-pointer" src={profileMenu} alt="" />
