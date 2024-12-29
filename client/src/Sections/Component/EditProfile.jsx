@@ -3,6 +3,8 @@ import { useContext } from "react";
 import arrow from "./Posts-images/Arrow.png";
 import userImg from "./Posts-images/userImg.png";
 import { MyContext } from "../../GlobalVariables";
+import { useNavigate } from "react-router-dom";
+import Decoration from "./Decoration";
 const EditProfile = () => {
   //   const [userName, setUserName] = "Jane Cooper";
   //     const [userHandle, setUserHandle] = "jane_cooper_123";
@@ -12,7 +14,7 @@ const EditProfile = () => {
   // const [userHandle, setUserHandle] = useState("jane_cooper_123");
   // const [pronouns, setPronouns] = useState("He");
   // const [bio, setBio] = useState("All will be well in his name");
-
+  const navigate = useNavigate();
   const {
     userName,
     setUserName,
@@ -26,7 +28,7 @@ const EditProfile = () => {
   return (
     <div className="bg-gray-200 h-[900px]">
       <div className="flex justify-center mb-4 gap-10  items-center ">
-        <img src={arrow} />
+        <img src={arrow} onClick={() => navigate("/user-profile")} />
         <h2 className="text-2xl">Edit Profile</h2>
       </div>
       <div className="flex flex-col items-center">
@@ -56,9 +58,13 @@ const EditProfile = () => {
               setterState={setBio}
               detailsToEdit={"Bio"}
             />
+            <button className="ml-4" onClick={() => navigate("/denomination")}>
+              Add Denomination
+            </button>
           </div>
         </div>
       </div>
+      <Decoration />
     </div>
   );
 };
@@ -66,7 +72,7 @@ export default EditProfile;
 
 function UserProfile({ initialState, setterState, detailsToEdit }) {
   return (
-    <div className="mb-20">
+    <div className="mb-16">
       <div className="flex justify-between px-8 max-[664px]:px-4 max-[588px]:px-2 items-center">
         <label>{detailsToEdit}</label>
         <input

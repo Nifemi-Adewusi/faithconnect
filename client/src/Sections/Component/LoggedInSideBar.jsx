@@ -38,6 +38,7 @@ const LoggedInSideBar = () => {
       <img
         className="w-[46.95px] max-[833px]:mx-0 h-[45px] mx-auto cursor-pointer max-[833px]:hidden"
         src={DM}
+        onClick={() => navigate("/chats")}
         alt=""
       />
       <img
