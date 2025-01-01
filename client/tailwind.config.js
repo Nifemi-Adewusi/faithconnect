@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         inika: "inika",
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
         mainTheme: "#FF6132",

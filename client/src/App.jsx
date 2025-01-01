@@ -24,7 +24,7 @@ import Chat from "./Sections/Component/Chat";
 // import { MyProvider } from "./GlobalVariables";
 // import Plans from "../../Sections/Plans.jsx";
 // import Plans from "./Sections/Plans";
-// import './App.css'
+import './App.css'
 
 function App() {
   return (
