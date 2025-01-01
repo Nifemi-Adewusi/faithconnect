@@ -20,6 +20,13 @@ import camera from "./chat-images/camera.png";
 import sound from "./chat-images/sound.png";
 import files from "./chat-images/files.png";
 import { useEffect, useState } from "react";
+import LoggedInSideBar from "./LoggedInSideBar";
+import following from "./chat-images/following.png";
+import chat from "./chat-images/chat.png";
+import groups from "./chat-images/groups.png";
+import no from "./chat-images/no.png";
+import blocked from "./chat-images/blocked.png";
+// import {useContext}
 
 const messages = [
   {
@@ -74,52 +81,103 @@ const messages = [
   },
 ];
 
-const Chats = () => {
-  const [selectedChat, setSelectedChat] = useState(null);
+function ShowFilter() {
   return (
     <div>
-      {/* Conditional Rendering */}
-      {selectedChat ? (
-        <ChatDetails
-          chat={selectedChat}
-          goBack={() => setSelectedChat(null)} // Go back to chat list
-        />
-      ) : (
-        <div>
-          <div className="flex items-center justify-between max-[613px]:px-4 px-20 mt-3">
-            <h1 className="font-bold text-2xl">Chats</h1>
-            <img src={people} alt="people icon" />
-          </div>
-          {/* Search Bar */}
-          <div className="flex justify-center items-center">
-            <div className="relative w-3/5 max-[600px]:w-[95%] mt-5 ml-3">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 bg-[#EDEBEB] focus:ring-blue-500 flex flex-col justify-center"
-              />
-              <img
-                src={Search}
-                alt="search icon"
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-[21.05px] h-[40px] text-gray-400"
-              />
-            </div>
-          </div>
-          {/* Chat List */}
-          <div className="mt-4">
-            {messages.map((message) => (
-              <Chat
-                key={message.userName}
-                {...message}
-                onClick={() => setSelectedChat(message)} // Set selected chat
-              />
-            ))}
-          </div>
+      <h1 className="mb-1">Filter chats by</h1>
+      <FilterTags imgSrc={chat} filterMessage={"Unread"} />
+      <FilterTags imgSrc={groups} filterMessage={"groups"} />
+      <FilterTags imgSrc={following} filterMessage={"following"} />
+      <FilterTags imgSrc={no} filterMessage={"not following"} />
+      <FilterTags imgSrc={blocked} filterMessage={"blocked users"} />
+    </div>
+  );
+}
+
+function FilterTags({ imgSrc, filterMessage }) {
+  return (
+    <div className="flex gap-2 mb-2 items-center cursor-pointer">
+      <img src={imgSrc} className="w-[15px] h-[15.65px]" alt="" />
+      <p className="capitalize">{filterMessage}</p>
+    </div>
+  );
+}
+
+const Chats = () => {
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [show, setShow] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex gap-60 max-[833px]:flex-col-reverse">
+      {show && (
+        <div className="w-[130px] max-[833px]:w-full mt-3 max-[833px]:mt-0">
+          {show && <LoggedInSideBar showSideBar={show} />}
         </div>
       )}
+
+      <div className="w-full">
+        {/* Conditional Rendering */}
+
+        {selectedChat ? (
+          <ChatDetails
+            chat={selectedChat}
+            goBack={() => {
+              setSelectedChat(null);
+              setShow(true);
+            }} // Go back to chat list
+          />
+        ) : (
+          <div>
+            <div className="flex items-center justify-between max-[613px]:px-4 px-20 mt-3">
+              <h1 className="font-bold text-2xl">Chats</h1>
+              <img src={people} alt="people icon" />
+            </div>
+            {/* Search Bar */}
+            <div className="flex justify-center items-center">
+              <div className="relative w-3/5 max-[600px]:w-[95%] mt-5 ml-3">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 bg-[#EDEBEB] focus:ring-blue-500 flex flex-col justify-center"
+                />
+                <img
+                  src={Search}
+                  alt="search icon"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 w-[21.05px] h-[40px] text-gray-400"
+                />
+              </div>
+            </div>
+            <div className="flex justify-between px-8 mb-5 items-center mt-3">
+              <p className="font-semibold">Messages</p>
+
+              <img
+                onClick={() => setShowFilter((prevState) => !prevState)}
+                src={filter}
+                alt=""
+                className="cursor-pointer"
+              />
+              {showFilter && <ShowFilter />}
+            </div>
+            {/* Chat List */}
+            <div className="mt-4">
+              {messages.map((message) => (
+                <Chat
+                  key={message.userName}
+                  {...message}
+                  onClick={() => {
+                    setSelectedChat(message);
+                    setShow(false);
+                  }} // Set selected chat
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
+``;
 export default Chats;
 
 function Chat({ imgSrc, userName, userMessage, onClick }) {
@@ -139,6 +197,7 @@ function Chat({ imgSrc, userName, userMessage, onClick }) {
 
 function ChatDetails({ chat, goBack }) {
   const [message, setMessage] = useState("");
+
   const [messages, setMessages] = useState([
     { text: chat.userMessage, sender: "other" },
   ]);
@@ -178,10 +237,6 @@ function ChatDetails({ chat, goBack }) {
         </div>
       </div>
       <hr className="h-2 bg-mainTheme mt-4 mb-3" />
-      {/* <p className="w-[189.91px] text-white rounded-[20px] bg-[#373E4E] px-3 py-2 ml-3 ">
-        {chat.userMessage}
-      </p>
-      <p>{message}</p> */}
 
       {/* Messages Section */}
 
