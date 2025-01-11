@@ -113,7 +113,7 @@ const UserProfile = () => {
           <img className="cursor-pointer" src={reels} alt="" />
           <img className="cursor-pointer" src={tag} alt="" />
         </div>
-        <div className=" grid grid-cols-4 mt-4 max-[823px]:grid-cols-[1fr_1fr_1fr] gap-y-1">
+        <div className=" grid grid-cols-4 mt-4 max-[823px]:grid-cols-[1fr_1fr_1fr] gap-y-2 gap-x-3 max-[396px]:grid-cols-[1fr_1fr]">
           <img src={frame1} alt="" />
           <img src={frame2} alt="" />
           <img src={frame3} alt="" />
