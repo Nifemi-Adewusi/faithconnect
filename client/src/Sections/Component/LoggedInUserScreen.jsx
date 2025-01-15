@@ -37,8 +37,12 @@ import Logo from "./LoggedInScreenImages/Logo.png";
 import notify from "./LoggedInScreenImages/notify.png";
 import chat from "./LoggedInScreenImages/chat.png";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../../GlobalVariables";
 const LoggedInUserScreen = () => {
   const navigate = useNavigate();
+  const { photoUrl, userName } = useContext(MyContext);
+  const imgSrc = photoUrl || main;
   return (
     <div className="grid grid-cols-[115.02px_1fr_352px] max-[1023px]:grid-cols-[100.02px_1fr_300px] max-[836px]:grid-cols-1 relative">
       <div className="hidden max-[836px]:flex max-[836px]:justify-between px-3 mb-3 items-center mt-3">
@@ -101,8 +105,13 @@ const LoggedInUserScreen = () => {
         />
       </div>
       <div className="ml-6">
-        <div className="flex gap-4 ">
-          <StoriesComponent navigateTo={"/user-profile"} imgSrc={main} />
+        <div className="flex gap-4 overflow-x-scroll">
+          <StoriesComponent
+            navigateTo={"/user-profile"}
+            rounded={true}
+            imgSrc={imgSrc}
+            personName={userName}
+          />
           <StoriesComponent imgSrc={userImg1} personName="Wade Warren" />
           <StoriesComponent imgSrc={userImg2} personName="Jenny Wilson" />
           <StoriesComponent imgSrc={userImg3} personName={"Bessie Cooper"} />
@@ -152,12 +161,17 @@ const LoggedInUserScreen = () => {
 };
 export default LoggedInUserScreen;
 
-function StoriesComponent({ imgSrc, personName, navigateTo }) {
+function StoriesComponent({ imgSrc, personName, navigateTo, rounded = false }) {
   const navigate = useNavigate();
   return (
     <div>
       <img
         src={imgSrc}
+        // style={{  borderRadius: "50%" }}
+        style={{
+          borderRadius: rounded ? "50%" : "",
+          width: rounded ? "75px" : "",
+        }}
         onClick={() => navigate(navigateTo)}
         className="cursor-pointer"
         alt=""

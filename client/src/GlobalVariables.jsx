@@ -5,10 +5,11 @@ const MyContext = createContext();
 
 const MyProvider = ({ children }) => {
   // const  const [userName, setUserName] = useState("Jane Cooper");
-  const [userHandle, setUserHandle] = useState("jane_cooper_123");
+  const [userHandle, setUserHandle] = useState("");
   const [pronouns, setPronouns] = useState("He");
   const [bio, setBio] = useState("All will be well in his name");
-  const [userName, setUserName] = useState("Jane Cooper");
+  const [userName, setUserName] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
 
   return (
     <MyContext.Provider
@@ -21,6 +22,8 @@ const MyProvider = ({ children }) => {
         setBio,
         userName,
         setUserName,
+        photoUrl,
+        setPhotoUrl,
       }}
     >
       {children}

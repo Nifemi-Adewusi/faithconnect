@@ -8,13 +8,37 @@ import Rect2 from "../Plans-Images/Rectangle-7.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import googleImg from "./Registration-Images/google.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "./Firebase";
 import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../GlobalVariables";
 function Registration({ text }) {
   const [phone, setPhone] = useState("+234");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
+  const { setUserName, setPhotoUrl, setUserHandle } = useContext(MyContext);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const displayName = user.displayName;
+      // const email = user.email;
+      const photoUrl = user.photoURL;
+      console.log(displayName);
+      const firstWord = displayName.split(" ");
+      // console.log(firstWord);
+      setUserName(displayName);
+      setUserHandle(firstWord[0]);
+      setPhotoUrl(photoUrl);
+      // console.log("User Info:", result.user);
+      console.log(photoUrl);
+      navigate("/LoggedIn");
+    } catch (error) {
+      console.error("Error during sign-in", error);
+    }
+  };
   const navigate = useNavigate();
   return (
     <div className="flex mx-auto container font-poppins">
@@ -126,7 +150,10 @@ function Registration({ text }) {
             <p className="text-black font-bold">OR</p>
             <hr className="flex-grow border-t border-[black]" />
           </div>
-          <button className="text-black bg-white w-[354.65px] rounded-[13.43px] border-[0.79px] pt-[13.26px] pr-[66.29px] pb-[13.26px] pl-[66.29px] flex justify-center gap-2 mt-6 border-[#FF6132] ">
+          <button
+            className="text-black bg-white w-[354.65px] rounded-[13.43px] border-[0.79px] pt-[13.26px] pr-[66.29px] pb-[13.26px] pl-[66.29px] flex justify-center gap-2 mt-6 border-[#FF6132] "
+            onClick={handleGoogleSignIn}
+          >
             <img src={googleImg} />
             Sign up with google
           </button>

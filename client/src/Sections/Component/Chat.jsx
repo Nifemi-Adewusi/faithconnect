@@ -397,7 +397,7 @@ function Userprofile({
           <p>Following</p>
         </div>
       </div>
-      <div className="px-2 mt-3 mb-3">
+      <div className="px-2 mt-3 mb-3 ">
         <p>{chat.profession}</p>
         <p>{chat.profileMessage}</p>
       </div>

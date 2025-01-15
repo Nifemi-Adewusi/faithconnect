@@ -20,7 +20,8 @@ import { useContext } from "react";
 import { MyContext } from "../../GlobalVariables";
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userHandle, userName, bio } = useContext(MyContext);
+  const { userHandle, userName, bio, photoUrl } = useContext(MyContext);
+  const imgSrc = photoUrl || userImg;
   return (
     <div className="flex gap-24 lg:gap-48 xl:gap-72 max-[833px]:flex-col-reverse max-[833px]:px-8">
       {/* <div className=" h-[823px] bg-[#FF6132] flex flex-col  justify-between max-[833px]:flex-row max-[833px]:h-[45px] max-[833px]:items-center max-[833px]:w-390px relative max-[833px]:bottom-0 max-[833px]:px-3 max-[833px]:py-2">
@@ -82,12 +83,12 @@ const UserProfile = () => {
             Edit Profile
           </button>
           <button className="w-[170px] rounded-[6px] h-[30px] bg-[#EFEFEF]">
-            Share profile
+            Share profiles
           </button>
         </div>
         <div className="flex items-center gap-10 mt-5">
           <div>
-            <img src={userImg} alt="" />
+            <img className="rounded-full w-16" src={imgSrc} alt="" />
             <p className="text-[10px]">{userName}</p>
           </div>
           <div>
